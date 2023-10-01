@@ -1,5 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getEntry } from "astro:content";
+
+const currentGoals = await getEntry("goals", "2023-10");
+const { Content: CurrentGoalsContent } = await currentGoals.render();
 ---
 
 <Layout title="burntobsidian's home">
@@ -9,8 +13,12 @@ import Layout from "../layouts/Layout.astro";
 		>
 			burntobsidian's home
 		</h1>
-		<p class="text-center">documenting my journey through time</p>
+		<p class="pb-32 text-center">documenting my journey through time</p>
 	</main>
+	<section class="mx-auto w-11/12 max-w-7xl p-4">
+		<h2 class="pb-2 font-cal text-lg md:text-2xl">
+			{currentGoals.data.timeframe} goals
+		</h2>
+		<CurrentGoalsContent />
+	</section>
 </Layout>
-
-<style></style>
